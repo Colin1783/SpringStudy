@@ -9,12 +9,14 @@ import java.io.IOException;
 
 @Controller
 public class Controller01 {
+	private String name;
+	String data = name + "님 반갑습니다.";
+
 	@RequestMapping("/main1")
 	public void method(WebRequest request, HttpServletResponse response) throws IOException {
 		// 1.요청 분석/가공
 		String name = request.getParameter("name");
 		// 2. 비즈니스 로직 실행
-		String data = name + "님 반갑습니다.";
 
 		String result = STR."""
 <!DOCTYPE html>
