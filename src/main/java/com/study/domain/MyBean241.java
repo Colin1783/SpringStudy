@@ -6,4 +6,5 @@ import lombok.Data;
 public class MyBean241 {
 	private String firstName;
 	private String lastName;
+
 }
