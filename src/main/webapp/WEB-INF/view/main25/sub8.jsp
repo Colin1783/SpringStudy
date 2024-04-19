@@ -26,7 +26,7 @@
     <div class="employee">
         <c:forEach items="${employees}" var="employee">
             <p> 직원ID: ${employee.id}</p>
-            <p> 이름: ${employee.LName} ${employee.FName}</p>
+            <p> 이름: ${employee.lastName} ${employee.firstName}</p>
             <p> 생년월일: ${employee.birth}</p>
             <div> 생년월일: ${employee.photo}</div>
             <textarea> 비고: ${employee.notes}</textarea>

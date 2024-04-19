@@ -280,7 +280,7 @@ public class Controller25 {
 				String photo = rs.getString(5);
 				String notes = rs.getString(6);
 
-				MyBean256Employees data = new MyBean256Employees(id, lName, fName, birth, photo, notes);
+				MyBean256Employees data = new MyBean256Employees();
 				list.add(data);
 			}
 		}
