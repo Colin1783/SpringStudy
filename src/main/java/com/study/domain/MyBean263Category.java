@@ -1,0 +1,9 @@
+package com.study.domain;
+
+import lombok.Data;
+
+@Data
+public class MyBean263Category {
+	int id;
+	String name;
+}

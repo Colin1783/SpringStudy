@@ -1,34 +1,19 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Colin
-  Date: 2024-04-17
-  Time: 오전 11:03
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <html>
 <head>
-    <title>Title</title>
+    <style>
+        table, tr, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        table {
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
-<h3>고객 조회</h3>
-<form>
-    고객명:
-    <input type="text" name="search" placeholder="조회할 고객명을 입력하세요." value="${prevSearch}">
-    <input type="submit" value="조회">
-</form>
-</form>
-<hr>
-<form>
-    국가
-    <select name="country" multiple>
-        <c:forEach items="${countryList}" var="country">
-            <option value="${country}">${country}</option>
-        </c:forEach>
-    </select>
-    <button>조회</button>
-</form>
 <hr>
 <table>
     <thead>
@@ -56,5 +41,18 @@
     </c:forEach>
     </tbody>
 </table>
+
+<div style="text-align: center; margin-top: 20px;">
+    <c:forEach begin="1" end="10" var="pageNumber">
+        <c:url var="link" value="/main27/sub1">
+            <c:param name="page" value="${pageNumber}"/>
+        </c:url>
+        <span>
+            <a href="/main27/sub1?page=${pageNumber}">${pageNumber}</a>
+        </span>
+    </c:forEach>
+</div>
+
+
 </body>
 </html>
