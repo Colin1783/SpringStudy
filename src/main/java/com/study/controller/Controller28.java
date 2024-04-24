@@ -36,7 +36,7 @@ public class Controller28 {
 		PreparedStatement pst = con.prepareStatement(sql);
 
 		try (con; pst;) {
-			pst.setString(1, customer.getName());
+			pst.setString(1, customer.getCustomerName());
 			pst.setString(2, customer.getContactName());
 			pst.setString(3, customer.getAddress());
 			pst.setString(4, customer.getCity());
@@ -58,26 +58,48 @@ public class Controller28 {
 	}
 
 	@PostMapping("sub2")
-	public String method2(MyBean256Employees employee, RedirectAttributes rattr) throws SQLException {
+	public String method3(MyBean256Employees employee, RedirectAttributes rattr) throws SQLException {
 		String sql = """
 						INSERT INTO Employees
-						(FirstName, LastName, BirthDate, Photo, Notes)
-						VALUES (?, ?, ?, ?, ?);
+						(id, FirstName, LastName, BirthDate, Photo, Notes)
+						VALUES (?, ?, ?, ?, ?, ?);
 						""";
 
 		Connection con = dataSource.getConnection();
 		PreparedStatement pst = con.prepareStatement(sql);
 		try (con; pst;) {
-			pst.setString(1, employee.getFirstName());
-			pst.setString(2, employee.getLastName());
-			pst.setString(3, employee.getBirth());
-			pst.setString(4, employee.getPhoto());
-			pst.setString(5, employee.getNotes());
+			pst.setInt(1, employee.getId());
+			pst.setString(2, employee.getFirstName());
+			pst.setString(3, employee.getLastName());
+			pst.setString(4, employee.getBirth());
+			pst.setString(5, employee.getPhoto());
+			pst.setString(6, employee.getNotes());
 
 			int rowCount = pst.executeUpdate();
 			if (rowCount > 0) {
 				rattr.addFlashAttribute("message", "직원 등록이 완료되었습니다.");
 			}
+		}
+
+		return "redirect:/main27/sub2";
+	}
+
+	@PostMapping("sub3/delete")
+	public String method3(Integer id, RedirectAttributes rattr) throws SQLException {
+		String sql = """
+						DELETE FROM Employees
+						WHERE id = ?;
+						""";
+
+		Connection con = dataSource.getConnection();
+		PreparedStatement pst = con.prepareStatement(sql);
+		pst.setInt(1, id);
+
+		int rowCount = pst.executeUpdate();
+		if (rowCount > 0) {
+			rattr.addFlashAttribute("message", "삭제가 완료되었습니다.");
+		} else {
+			rattr.addFlashAttribute("message", "삭제가 불가합니다.");
 		}
 
 		return "redirect:/main27/sub2";

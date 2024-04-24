@@ -50,3 +50,18 @@ ORDER BY CustomerID DESC;
 SELECT *
 FROM Employees
 ORDER BY EmployeeID DESC;
+
+DELETE
+FROM Employees
+WHERE EmployeeID BETWEEN (SELECT MAX(EmployeeID) FROM Employees) AND
+
+DELETE FROM Employees
+WHERE EmployeeID >= (
+    SELECT EmployeeID
+    FROM (
+             SELECT EmployeeID
+             FROM Employees
+             ORDER BY EmployeeID DESC
+             LIMIT 1 OFFSET 4
+         ) AS SubQuery
+);

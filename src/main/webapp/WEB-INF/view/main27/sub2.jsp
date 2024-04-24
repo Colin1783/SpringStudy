@@ -49,6 +49,13 @@
     </c:if>
 </div>
 <hr>
+<h3>직원 조회</h3>
+<form action="">
+    직원 번호
+    <input type="number" name="id">
+    <button>조회</button>
+</form>
+<hr>
 <table>
     <thead>
     <tr>
@@ -77,10 +84,13 @@
         <input type="hidden" name="someData" value="value">
         <button type="submit">신규 등록</button>
     </form>
-
-    <form style="display: inline-block" action="/main28/sub2" method="post">
-        <input type="hidden" name="someData" value="value">
-        <button type="submit"> 등록 삭제</button>
+    <form action="/main28/sub3/delete" method="post">
+        <div style="display: inline-block">
+            <input type="text" name="id" value="${employee.id}">
+        </div>
+        <div>
+            <button type="submit">삭제</button>
+        </div>
     </form>
 </div>
 <div style="text-align: center">

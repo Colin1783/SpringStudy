@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class MyBean254Customer {
 	private int id;
-	private String name;
+	private String customerName;
 	private String contactName;
 	private String address;
 	private String city;
