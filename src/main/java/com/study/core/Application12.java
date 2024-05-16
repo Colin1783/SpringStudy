@@ -9,12 +9,12 @@ import org.springframework.stereotype.Component;
 
 @SpringBootApplication
 public class Application12 {
-	public static void main(String[] args) {
-		BeanFactory bf = SpringApplication.run(Application12.class, args);
-		MyClass122 bean = bf.getBean(MyClass122.class);
-		MyClass121 field = bean.getField();
-		System.out.println("field = " + field); // null 아님
-	}
+    public static void main(String[] args) {
+        BeanFactory bf = SpringApplication.run(Application12.class, args);
+        MyClass122 bean = bf.getBean(MyClass122.class);
+        MyClass121 field = bean.getField();
+        System.out.println("field = " + field); // null 아님
+    }
 }
 
 @Component
@@ -25,7 +25,7 @@ class MyClass121 {
 @Getter
 @RequiredArgsConstructor
 class MyClass122 {
-	private final MyClass121 field;
+    private final MyClass121 field;
 
 
 }

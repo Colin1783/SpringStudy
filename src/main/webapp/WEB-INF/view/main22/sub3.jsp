@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Colin
-  Date: 2024-04-16
-  Time: 오전 10:31
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <html>
@@ -17,18 +10,20 @@
         아이디와 패스워드를 확인하세요.
     </div>
 </c:if>
+<%--form>div*2>input^div>input:s--%>
 <form action="/main22/sub4" method="post">
     <div>
-        id:
+        id
         <input type="text" name="id">
     </div>
     <div>
-        pw:
-        <input type="password" name="password">
+        pw
+        <input type="text" name="password">
     </div>
     <div>
         <input type="submit" value="로그인">
     </div>
 </form>
+
 </body>
 </html>

@@ -8,64 +8,59 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("main17")
 public class Controller17 {
-	private final HttpSession httpSession;
 
-	public Controller17(HttpSession httpSession) {
-		this.httpSession = httpSession;
-	}
+    @RequestMapping("sub1")
+    public void sub1(Model model, HttpSession session) {
+        // session : 한 브라우저의 요청들(request)이 공유하는 객체
+        model.addAttribute("name", "흥민");
+        session.setAttribute("city", "런던");
 
-	@RequestMapping("sub1")
-	public void sub1(Model model, HttpSession session) {
-		// session 한 브라우저의 요청들(Requests)이 공유하는 객체
-		model.addAttribute("name", "흥민");
-		session.setAttribute("city", "london");
+        // ${model} -> 테슬라
+        // ${requestScope.model} -> 테슬라
+        // ${sessionScope.model} -> 제네시스
+        model.addAttribute("model", "테슬라");
+        session.setAttribute("model", "제네시스");
+        // /WEB-INF/view/main17/sub1.jsp
+    }
 
-		model.addAttribute("model", "테슬라");
-		session.setAttribute("model", "제네시스");
-	}
+    @RequestMapping("sub2")
+    public String sub2(Model model) {
+        // /WEB-INF/view/main17/sub1.jsp
+        return "/main17/sub1";
+    }
 
-	@RequestMapping("sub2")
-	public String sub2(Model model) {
-		model.addAttribute("model", "제네시스");
-		return "/main17/sub1";
-	}
+    @RequestMapping("sub3")
+    public void sub3(String id, HttpSession session) {
+        if (id != null && !id.isBlank()) {
+            session.setAttribute("userName", id);
+        }
+    }
 
-	@RequestMapping("sub3")
-	public void sub3(String id, HttpSession session) {
-		if (id != null && !id.isBlank()) {
-			session.setAttribute("userName", id);
-		}
-	}
+    @RequestMapping("sub4")
+    public void sub4(Model model) {
+    }
 
-	@RequestMapping("sub4")
-	public void sub4(Model model) {
+    @RequestMapping("sub5")
+    public void sub5(Model model) {
+    }
 
-	}
+    @RequestMapping("sub9")
+    public void sub9(HttpSession session) {
+        // session 만료
+        session.invalidate();
+    }
 
-	@RequestMapping("sub5")
-	public void sub5(Model model) {
-	}
+    // todo: sub6.jsp, sub7,jsp, sub8.jsp, navbar4.jsp
+    @RequestMapping("sub6")
+    public void sub6(Model model) {
+    }
 
-	@RequestMapping("sub9")
-	public void sub5(HttpSession session) {
-		session.invalidate();
-	}
+    @RequestMapping("sub7")
+    public void sub7(Model model) {
+    }
 
-	//sub6, sub7, sub8, navbar4
-	@RequestMapping("sub6")
-	public void sub6(String id, HttpSession session) {
-		if (id != null && !id.isBlank()) {
-			session.setAttribute("userName", id);
-		}
-	}
-
-	@RequestMapping("sub7")
-	public void sub7(Model model) {
-	}
-
-	@RequestMapping("sub8")
-	public void sub8(Model model) {
-	}
-
+    @RequestMapping("sub8")
+    public void sub8(Model model) {
+    }
 
 }

@@ -4,7 +4,6 @@ import lombok.Data;
 
 @Data
 public class MyBean241 {
-	private String firstName;
-	private String lastName;
-
+    private String firstName;
+    private String lastName;
 }

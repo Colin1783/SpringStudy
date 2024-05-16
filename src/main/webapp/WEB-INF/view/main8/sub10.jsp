@@ -1,24 +1,18 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Colin
-  Date: 2024-04-08
-  Time: 오후 3:36
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
-<h1>${names.HMSon}</h1>
-<h1>${names.KILee}</h1>
-<h1>${names.MJKim}</h1>
+<h1>${names.son}</h1>
+<h1>${names.lee}</h1>
+<h1>${names.kim}</h1>
 <hr>
-<h1>${names["HMSon"]}</h1>
-<h1>${names["KILee"]}</h1>
-<h1>${names["MJKim"]}</h1>
+<h1>${names["son"]}</h1>
+<h1>${names["lee"]}</h1>
+<h1>${names["kim"]}</h1>
 <hr>
-
+<h1>${others["손흥민"]}</h1>
+<h1>${others["lee kang in"]}</h1>
 </body>
 </html>

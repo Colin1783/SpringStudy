@@ -1,40 +1,49 @@
 package com.study.domain;
 
 public class MyBean094 {
-	private String model;
-	private Integer price;
-	private String company;
-	private Double weight;
+    private String modelNumber;
+    private Integer productPrice;
+    private String name;
+    private Double weight;
+    private boolean used;
 
-	public String getCompany() {
-		return company;
-	}
+    public boolean isUsed() {
+        return used;
+    }
 
-	public void setCompany(String company) {
-		this.company = company;
-	}
+    public void setUsed(boolean used) {
+        this.used = used;
+    }
 
-	public String getModel() {
-		return model;
-	}
+    public String getModelNumber() {
+        return modelNumber;
+    }
 
-	public void setModel(String model) {
-		this.model = model;
-	}
+    public void setModelNumber(String modelNumber) {
+        this.modelNumber = modelNumber;
+    }
 
-	public Integer getPrice() {
-		return price;
-	}
+    public Integer getProductPrice() {
+        return productPrice;
+    }
 
-	public void setPrice(Integer price) {
-		this.price = price;
-	}
+    public void setProductPrice(Integer productPrice) {
+        this.productPrice = productPrice;
+    }
 
-	public Double getWeight() {
-		return weight;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setWeight(Double weight) {
-		this.weight = weight;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Double weight) {
+        this.weight = weight;
+    }
 }

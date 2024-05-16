@@ -1,12 +1,17 @@
 package com.study.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 public class MyBean143 {
-	private String address;
+    private String address;
+
+    public MyBean143() {
+    }
+
+    public MyBean143(String address) {
+        this.address = address;
+    }
 }

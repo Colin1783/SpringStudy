@@ -1,26 +1,27 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Colin
-  Date: 2024-04-18
-  Time: 오후 10:00
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <html>
 <head>
     <title>Title</title>
+    <style>
+        table, tr, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        table {
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
 <h3>주문일로 주문 조회</h3>
 <form>
-    <div>
-        시작:
+    <div>시작 :
         <input type="date" name="start" value="${prevStart}">
     </div>
-
     <div>
-        종료:
+        종료 :
         <input type="date" name="end" value="${prevEnd}">
     </div>
     <div>
@@ -33,7 +34,8 @@
         조회된 내용이 없습니다.
     </div>
 </c:if>
-<c:if test="${!empty orderList}">
+<c:if test="${not empty orderList}">
+
     <table>
         <thead>
         <tr>
@@ -50,7 +52,7 @@
                 <td>${order.id}</td>
                 <td>${order.customerId}</td>
                 <td>${order.employeeId}</td>
-                <td>${order.orderDate}</td>
+                <td>${order.date}</td>
                 <td>${order.shipperId}</td>
             </tr>
         </c:forEach>

@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Colin
-  Date: 2024-04-11
-  Time: 오전 11:37
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <html>
@@ -12,22 +5,22 @@
     <title>Title</title>
 </head>
 <body>
-<%--Atrribute 추가--%>
-<c:set var="attr1" value="손흥민"/>
-<c:set var="attr2">
-    이강인은 PSG 소속이다
-</c:set>
+<%-- set : attribute 추가--%>
+<c:set var="attr1" value="손흥민"></c:set>
+<c:set var="attr2" value="이강인"></c:set>
 <c:set var="attr3" value="김하성" scope="page"></c:set>
 
 <p>${attr1}</p>
+
+<%--이강인--%>
 <p>${attr2}</p>
 <p>${attr3}</p>
 
 <hr>
-<c:set target="${obj1}" property="address" value="gangnam"></c:set>
-<c:set target="${obj1}" property="years" value="55"></c:set>
+<c:set target="${obj1}" property="address" value="강남"></c:set>
+<c:set target="${obj1}" property="age" value="55"/>
 <p>${obj1.address}</p>
 <p>${obj1.city}</p>
-<p>${obj1.years}</p>
+<p>${obj1.age}</p>
 </body>
 </html>

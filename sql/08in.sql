@@ -19,7 +19,6 @@ WHERE Country IN ('germany', 'uk', 'sweden', 'france');
 SELECT *
 FROM Products
 WHERE CategoryID IN (2, 3, 6);
-
 # todo : 브라질, 일본, 이탈리아에 있는 공급자(Suppliers) 조회
 SELECT *
 FROM Suppliers

@@ -9,22 +9,21 @@ import org.springframework.stereotype.Component;
 
 @SpringBootApplication
 public class Application13 {
-	public static void main(String[] args) {
-
-		BeanFactory bf = SpringApplication.run(Application13.class, args);
-		MyClass132 b1 = bf.getBean(MyClass131.class).getField();
-
-		System.out.println("b1 = " + b1);
-	}
+    public static void main(String[] args) {
+        BeanFactory bf = SpringApplication.run(Application13.class, args);
+        MyClass132 b1 = bf.getBean(MyClass131.class).getField();
+        // todo ; 생성자 주입을 활용해서
+        //  null 이 아니게
+        System.out.println("b1 = " + b1);
+    }
 }
 
-@Component
-@Getter
-@RequiredArgsConstructor
 
-// MyClass131 은 MyClass132에 의존한다?
+@Getter
+@Component
+@RequiredArgsConstructor
 class MyClass131 {
-	private final MyClass132 field;
+    private final MyClass132 field;
 }
 
 @Component

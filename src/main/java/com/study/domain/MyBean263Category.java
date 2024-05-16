@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class MyBean263Category {
-	int id;
-	String name;
+    private Integer id;
+    private String name;
+    private String description;
 }

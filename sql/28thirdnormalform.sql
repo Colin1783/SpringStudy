@@ -1,41 +1,61 @@
-#Third Normal Form 3NF 제3정규화
-# 1) 제2정규형을 만족
-# 2) 키가 아닌 컬럼끼리 종ㅎ속되면 안됨
+# 28thirdNormalForm.sql
 
+# ThirdNormalForm (3NF)
+
+# 1) 2NF 이다.
+# 2) 키가 아닌 컬럼끼리 종속되면 안됨
 USE mydb1;
+DROP TABLE phone_number;
+DROP TABLE customer;
 
-DROP TABLE customers;
-
-CREATE TABLE customers
+CREATE TABLE customer
 (
-    id         INT PRIMARY KEY auto_increment,
-    first_name VARCHAR(10),
-    last_name  VARCHAR(30),
-    grade      INT,
-    FOREIGN KEY (grade) REFERENCES grade (grade)
+    id         INT PRIMARY KEY AUTO_INCREMENT,
+    first_name VARCHAR(3),
+    last_name  VARCHAR(3),
+    level      INT,
+    benefit    VARCHAR(100)
 );
-
-CREATE TABLE grade
-(
-    grade   INT PRIMARY KEY,
-    benefit VARCHAR(100)
-);
-
-INSERT INTO customers
-    (first_name, last_name, `grade`)
-VALUES ('heungmin', 'son', 1),
-       ('gangin', 'lee', 1),
-       ('hasung', 'kim', 2),
-       ('hasun', 'park', 2),
-       ('steve', 'cap', 3);
-
-INSERT INTO grade
-    (grade, benefit)
-VALUES (1, '무료배송'),
-       (2, '할인'),
-       (3, '라운지 이용');
-
-DROP TABLE customers, grade;
+INSERT INTO customer
+    (first_name, last_name, level, benefit)
+VALUES ('son', 'hm', 1, '무료배송'),
+       ('lee', 'ki', 1, '무료배송'),
+       ('kim', 'hs', 2, '할인'),
+       ('lee', 'jh', 2, '할인'),
+       ('cap', 'ste', 3, '라운지');
 
 SELECT *
-FROM customers;
+FROM customer;
+
+DROP TABLE customer;
+DROP TABLE customer_benefit;
+CREATE TABLE customer
+(
+    id         INT PRIMARY KEY AUTO_INCREMENT,
+    first_name VARCHAR(3),
+    last_name  VARCHAR(3),
+    level      INT,
+    FOREIGN KEY (level) REFERENCES customer_benefit (level)
+);
+CREATE TABLE customer_benefit
+(
+    level   INT PRIMARY KEY,
+    benefit VARCHAR(100)
+);
+INSERT INTO customer
+    (first_name, last_name, level)
+VALUES ('son', 'hm', 1),
+       ('lee', 'ki', 1),
+       ('kim', 'hs', 2),
+       ('lee', 'jh', 2),
+       ('cap', 'ste', 3);
+INSERT INTO customer_benefit
+    (level, benefit)
+VALUES (1, '무료배송'),
+       (2, '할인'),
+       (3, '라운지');
+
+SELECT *
+FROM customer;
+SELECT *
+FROM customer_benefit;

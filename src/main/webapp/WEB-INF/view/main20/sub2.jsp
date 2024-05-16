@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Colin
-  Date: 2024-04-15
-  Time: 오전 11:19
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <html>
@@ -13,27 +6,32 @@
 </head>
 <body>
 <div>
+    <%--    value : 기본값--%>
     <input type="text" value="jordan">
 </div>
 <div>
+    <%--    readonly : 변경불가--%>
     <input type="text" value="messi" readonly>
 </div>
 <div>
-    <input type="text" maxlength="5" size="5">
+    <%--    size : 표시되는 인풋의 길이--%>
+    <input type="text" size="5">
 </div>
 <div>
-    <input type="number" min="1" max="10">
+    <%--    maxlength : 입력값 길이 제한--%>
+    <input type="text" maxlength="5">
 </div>
 <div>
-    <input type="date" min="1" max="10">
+    <%--    min : 최소값, max : 최대값--%>
+    <input type="number" min="10" max="20">
 </div>
-
 <div>
+    <%--    multiple : 여러개 선택 가능--%>
     <input type="file" multiple>
 </div>
-
 <div>
-    <input type="text" placeholder="입력값">
+    <%--    placeholder : 입력값 힌트 주기--%>
+    <input type="text" placeholder="입력값 힌트 주기">
 </div>
 </body>
 </html>

@@ -9,28 +9,25 @@ import org.springframework.stereotype.Component;
 
 @SpringBootApplication
 public class Application15 {
-	public static void main(String[] args) {
-		BeanFactory bf = SpringApplication.run(Application15.class, args);
-
-		MyClass151 b1 = bf.getBean(MyClass152.class).getDependancy();
-
-		System.out.println("b1 = " + b1);
-	}
+    public static void main(String[] args) {
+        BeanFactory bf = SpringApplication.run(Application15.class, args);
+        MyClass152 d = bf.getBean(MyClass151.class).getDependency();
+        // todo ; null이 아니게 setter 주입 활용한 코드 작성
+        System.out.println("d = " + d);
+    }
 }
 
+@Getter
 @Component
 class MyClass151 {
+    private MyClass152 dependency;
+
+    @Autowired
+    public void setDependency(MyClass152 dependency) {
+        this.dependency = dependency;
+    }
 }
 
 @Component
-@Getter
 class MyClass152 {
-
-	private MyClass151 dependancy;
-
-	@Autowired
-	public void setDependancy(MyClass151 dependancy) {
-		this.dependancy = dependancy;
-	}
-
 }

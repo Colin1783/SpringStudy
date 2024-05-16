@@ -1,31 +1,31 @@
 package com.study.domain;
 
 public class MyBean093 {
-	public String getAddress() {
-		return address;
-	}
+    private String address;
+    private String city;
+    private Integer age;
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+    public String getAddress() {
+        return address;
+    }
 
-	public Integer getAge() {
-		return age;
-	}
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-	public void setAge(Integer age) {
-		this.age = age;
-	}
+    public String getCity() {
+        return city;
+    }
 
-	public String getCity() {
-		return city;
-	}
+    public void setCity(String city) {
+        this.city = city;
+    }
 
-	public void setCity(String city) {
-		this.city = city;
-	}
+    public Integer getAge() {
+        return age;
+    }
 
-	private String address;
-	private String city;
-	private Integer age;
+    public void setAge(Integer age) {
+        this.age = age;
+    }
 }

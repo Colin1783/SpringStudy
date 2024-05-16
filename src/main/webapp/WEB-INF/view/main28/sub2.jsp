@@ -2,37 +2,34 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <html>
 <head>
-    <title>신입 직원 정보 입력</title>
+    <title>Title</title>
 </head>
 <body>
-<div>
-    <c:if test="${not empty message}">
-        <div style="padding:20px; background-color: skyblue">
-                ${message}
-        </div>
-    </c:if>
-</div>
-<h3>직원 정보 입력</h3>
-<form method="post">
+<c:if test="${not empty message}">
+    <div style="padding: 20px; background-color: skyblue">${message}</div>
+</c:if>
+
+<h3>직원 입력</h3>
+<form action="" method="post">
     <div>
-        이름
-        <input type="text" name="firstName">
-    </div>
-    <div>
-        성
+        last name
         <input type="text" name="lastName">
     </div>
     <div>
-        생년월일
-        <input type="date" name="birth">
+        first name
+        <input type="text" name="firstName">
     </div>
     <div>
-        사진
-        <input type="file" name="photo">
+        birth date
+        <input type="date" name="birthDate">
     </div>
     <div>
-        비고
-        <input type="text" name="notes">
+        photo
+        <input type="text" name="photo">
+    </div>
+    <div>
+        notes
+        <textarea name="notes" id="" cols="30" rows="10"></textarea>
     </div>
     <div>
         <input type="submit" value="등록">

@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class MyBean145 {
-	private String name;
-	private String address;
-	private Integer age;
+    private String address;
+    private String name;
+    private Integer age;
 }

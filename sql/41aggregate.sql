@@ -37,3 +37,5 @@ FROM Products;
 # AVG : 평균
 SELECT AVG(Price)
 FROM Products;
+
+

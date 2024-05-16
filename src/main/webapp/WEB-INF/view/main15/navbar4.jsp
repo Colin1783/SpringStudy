@@ -1,23 +1,15 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Colin
-  Date: 2024-04-12
-  Time: 오전 10:37
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<style>
-
-</style>
 
 <div>
+    <div>
+        navbar4의 attr1 : ${attr1}
+    </div>
+    <div>
+        navbar4의 attr2 : ${attr2}
+    </div>
+    <div>
+        navbar4의 attr3 : ${attr3} <%--  좁은영역에서부터 attribute 찾음 --%>
+    </div>
     navbar4
-    <br>
-    ${attr1}
-    ${attr2}
-    ${attr3}
-
-    tkrkkdk
 </div>
-

@@ -1,7 +1,7 @@
 package com.study.controller;
 
 import com.study.domain.MyBean254Customer;
-import com.study.domain.MyBean256Employees;
+import com.study.domain.MyBean258Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,91 +17,82 @@ import java.sql.SQLException;
 @Controller
 @RequestMapping("main28")
 public class Controller28 {
-	@Autowired
-	private DataSource dataSource;
+    @Autowired
+    private DataSource dataSource;
 
-	@GetMapping("sub1")
-	public void sub1() {
-	}
+    @GetMapping("sub1")
+    public void sub1() {
 
-	@PostMapping("sub1")
-	public String sub1(MyBean254Customer customer, RedirectAttributes rttr) throws SQLException {
-		String sql = """
-						INSERT INTO Customers
-						(CustomerName, ContactName, Address, City, PostalCode, Country)
-						VALUES (?, ?, ?, ?, ?, ?);
-						""";
+    }
 
-		Connection con = dataSource.getConnection();
-		PreparedStatement pst = con.prepareStatement(sql);
+    @PostMapping("sub1")
+    public String sub2(MyBean254Customer customer, RedirectAttributes rttr) throws SQLException {
 
-		try (con; pst;) {
-			pst.setString(1, customer.getCustomerName());
-			pst.setString(2, customer.getContactName());
-			pst.setString(3, customer.getAddress());
-			pst.setString(4, customer.getCity());
-			pst.setString(5, customer.getPostalCode());
-			pst.setString(6, customer.getCountry());
+        String sql = """
+                INSERT INTO Customers
+                (CustomerName, ContactName, Address, City, PostalCode, Country)
+                VALUES (?, ?, ?, ?, ?, ?)
+                """;
 
-			int rowCount = pst.executeUpdate();
-			if (rowCount > 0) {
-				rttr.addFlashAttribute("message", "새 고객 정보가 등록되었습니다.");
-			}
-		}
+        Connection conn = dataSource.getConnection();
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+
+        try (pstmt; conn) {
+            pstmt.setString(1, customer.getName());
+            pstmt.setString(2, customer.getContactName());
+            pstmt.setString(3, customer.getAddress());
+            pstmt.setString(4, customer.getCity());
+            pstmt.setString(5, customer.getPostalCode());
+            pstmt.setString(6, customer.getCountry());
+
+            int rowCount = pstmt.executeUpdate();
+            if (rowCount == 1) {
+                rttr.addFlashAttribute("message", "새 고객이 등록되었습니다.");
+            }
+        }
+
+        return "redirect:/main28/sub1";
+    }
 
 
-		return "redirect:/main28/sub1";
-	}
+    // todo : 새 직원 입력하기
 
-	@GetMapping("sub2")
-	public void method2() {
-	}
+    // 1.form view
+    @GetMapping("sub2")
+    public String method3() {
 
-	@PostMapping("sub2")
-	public String method3(MyBean256Employees employee, RedirectAttributes rattr) throws SQLException {
-		String sql = """
-						INSERT INTO Employees
-						(id, FirstName, LastName, BirthDate, Photo, Notes)
-						VALUES (?, ?, ?, ?, ?, ?);
-						""";
+        return "main28/sub2";
+    }
 
-		Connection con = dataSource.getConnection();
-		PreparedStatement pst = con.prepareStatement(sql);
-		try (con; pst;) {
-			pst.setInt(1, employee.getId());
-			pst.setString(2, employee.getFirstName());
-			pst.setString(3, employee.getLastName());
-			pst.setString(4, employee.getBirth());
-			pst.setString(5, employee.getPhoto());
-			pst.setString(6, employee.getNotes());
+    // 2.저장 처리 로직
+    @PostMapping("sub2")
+    public String method4(MyBean258Employee employee, RedirectAttributes rttr) throws SQLException {
+        String sql = """
+                INSERT INTO Employees
+                (LastName, FirstName, BirthDate, Photo, Notes)
+                VALUES (?, ?, ?, ?, ?)
+                """;
+        Connection conn = dataSource.getConnection();
+        PreparedStatement pstmt = conn.prepareStatement(sql);
 
-			int rowCount = pst.executeUpdate();
-			if (rowCount > 0) {
-				rattr.addFlashAttribute("message", "직원 등록이 완료되었습니다.");
-			}
-		}
+        try (conn; pstmt) {
+            pstmt.setString(1, employee.getLastName());
+            pstmt.setString(2, employee.getFirstName());
+            pstmt.setString(3, employee.getBirthDate());
+            pstmt.setString(4, employee.getPhoto());
+            pstmt.setString(5, employee.getNotes());
 
-		return "redirect:/main27/sub2";
-	}
+            int rowCount = pstmt.executeUpdate();
+            if (rowCount == 1) {
+                rttr.addFlashAttribute("message", "새 직원이 입력되었습니다.");
+            } else {
+                rttr.addFlashAttribute("message", "문제가 발생하였습니다.");
+            }
+        }
 
-	@PostMapping("sub3/delete")
-	public String method3(Integer id, RedirectAttributes rattr) throws SQLException {
-		String sql = """
-						DELETE FROM Employees
-						WHERE id = ?;
-						""";
+        return "redirect:/main28/sub2";
 
-		Connection con = dataSource.getConnection();
-		PreparedStatement pst = con.prepareStatement(sql);
-		pst.setInt(1, id);
 
-		int rowCount = pst.executeUpdate();
-		if (rowCount > 0) {
-			rattr.addFlashAttribute("message", "삭제가 완료되었습니다.");
-		} else {
-			rattr.addFlashAttribute("message", "삭제가 불가합니다.");
-		}
+    }
 
-		return "redirect:/main27/sub2";
-	}
 }

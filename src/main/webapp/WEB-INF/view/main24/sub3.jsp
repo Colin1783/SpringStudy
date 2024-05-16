@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Colin
-  Date: 2024-04-16
-  Time: 오후 4:33
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <html>
@@ -12,9 +5,9 @@
     <title>Title</title>
 </head>
 <body>
-<h3>City List</h3>
+<h3>고객이 있는 나라들</h3>
 <ul>
-    <c:forEach items="${countries}" var="country">
+    <c:forEach items="${countryList}" var="country">
         <li>${country}</li>
     </c:forEach>
 </ul>

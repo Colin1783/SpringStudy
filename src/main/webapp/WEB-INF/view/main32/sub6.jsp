@@ -28,7 +28,7 @@
         </div>
         <div>
             birth
-            <input type="date" value="${employee.birth}" name="birthDate">
+            <input type="date" value="${employee.birthDate}" name="birthDate">
         </div>
         <div>
             photo

@@ -4,10 +4,9 @@ import lombok.Data;
 
 @Data
 public class MyBean331 {
-	private String stringCol;
-	private int intCol;
-	private double decCol;
-	private String dateCol;
-	private String dateTimeCol;
-
+    private String stringCol;
+    private String intCol;
+    private String decCol;
+    private String dateCol;
+    private String dateTimeCol;
 }

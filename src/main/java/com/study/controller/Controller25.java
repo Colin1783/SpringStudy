@@ -15,278 +15,297 @@ import java.util.ArrayList;
 @Controller
 @RequestMapping("main25")
 public class Controller25 {
-	@Autowired
-	private DataSource dataSource;
+    @Autowired
+    private DataSource dataSource;
 
-	@GetMapping("sub1")
-	public void method1(@RequestParam(value = "name", required = false)
-	                    String searchName,
-	                    Model model) throws SQLException {
-		var list = new ArrayList<MyBean251>();
-		String sql = STR."""
+    @GetMapping("sub1")
+    public void method1(@RequestParam(value = "name", required = false) String searchName,
+                        Model model) throws SQLException {
+        var list = new ArrayList<MyBean251>();
+        // jdk 21
+        String sql = STR."""
                 SELECT *
                 FROM Employees
                 WHERE LastName = '\{searchName}'
                 """;
-		Connection conn = dataSource.getConnection();
-		Statement stmt = conn.createStatement();
-		ResultSet rs = stmt.executeQuery(sql);
-		try (rs; stmt; conn) {
-			while (rs.next()) {
-				String id = rs.getString(1);
-				String lastName = rs.getString(2);
-				String firstName = rs.getString(3);
-				String birthDate = rs.getString(4);
-				String photo = rs.getString(5);
-				String notes = rs.getString(6);
 
-				MyBean251 obj
-								= new MyBean251(id, lastName, firstName, birthDate, photo, notes);
-				list.add(obj);
-			}
+        // jdk 21 이전
+        String sql1 = """
+                SELECT *
+                FROM Employees
+                WHERE LastName = '""" + searchName + "'";
 
-		}
-		model.addAttribute("employees", list);
-	}
+        Connection conn = dataSource.getConnection();
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(sql);
+        try (rs; stmt; conn) {
+            while (rs.next()) {
+                String id = rs.getString(1);
+                String lastName = rs.getString(2);
+                String firstName = rs.getString(3);
+                String birthDate = rs.getString(4);
+                String photo = rs.getString(5);
+                String notes = rs.getString(6);
 
-	@GetMapping("sub2")
-	public void method2(@RequestParam(value = "name", required = false)
-	                    String search,
-	                    Model model) throws Exception {
-		var list = new ArrayList<MyBean252>();
-		String sql = STR."""
-								SELECT *
-								FROM Products
-								WHERE ProductName LIKE "%\{search}%"
-								""";
+                MyBean251 obj
+                        = new MyBean251(id, lastName, firstName, birthDate, photo, notes);
+                list.add(obj);
+            }
 
-		Connection con = dataSource.getConnection();
-		Statement st = con.createStatement();
-		ResultSet rs = st.executeQuery(sql);
+        }
+        model.addAttribute("employees", list);
+    }
 
-		try (rs; st; con) {
-			while (rs.next()) {
-				int id = rs.getInt(1);
-				String name = rs.getString(2);
-				String unit = rs.getString(5);
-				double price = rs.getDouble(6);
+    @GetMapping("sub2")
+    public void method2(@RequestParam(value = "name", required = false) String search
+            , Model model) throws SQLException {
+        // todo : name 요청 파라미터와 일치하는 상품명으로 상품(Products) 조회
+        //  예) SELECT * FROM Products WHERE ProductName = 'Chais'
+        String sql = STR."""
+                SELECT * FROM Products
+                WHERE ProductName = '\{search}'
+                """;
+        var list = new ArrayList<MyBean252>();
+        Connection conn = dataSource.getConnection();
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(sql);
+        while (rs.next()) {
+            int id = rs.getInt(1);
+            String name = rs.getString(2);
+            String unit = rs.getString(5);
+            double price = rs.getDouble(6);
 
-				MyBean252 product = new MyBean252(id, name, unit, price);
-				list.add(product);
-			}
-		}
-		model.addAttribute("products", list);
-	}
+            MyBean252 product = new MyBean252(id, name, unit, price);
+            list.add(product);
+        }
 
-	@GetMapping("sub3")
-	public void method3(String search, Model model) throws Exception {
-		String oldsql = STR."""
-								SELECT *
-								FROM Products
-								WHERE ProductName LIKE "%\{search}%"
-								""";
+        model.addAttribute("products", list);
 
-		String sql = """
-						SELECT *
-						FROM Products
-						WHERE ProductName = ?
-						""";
+    }
 
-		var list = new ArrayList<MyBean252>();
+    @GetMapping("sub3")
+    public void method3(String search, Model model) throws SQLException {
+        String oldsql = STR."""
+                SELECT * FROM Products
+                WHERE ProductName = '\{search}'
+                """;
+        String sql = """
+                SELECT * FROM Products
+                WHERE ProductName = ?
+                """;
 
-		Connection con = dataSource.getConnection();
-		PreparedStatement pst = con.prepareStatement(sql);
-		pst.setString(1, search);
-		ResultSet rs = pst.executeQuery();
-		try (con; pst; rs) {
-			while (rs.next()) {
-				MyBean252 row = new MyBean252(rs.getInt(1),
-								rs.getString(2),
-								rs.getString(5),
-								rs.getDouble(6));
-				list.add(row);
-			}
-		}
-		model.addAttribute("products", list);
-	}
+        var list = new ArrayList<MyBean252>();
+        Connection conn = dataSource.getConnection();
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        // 첫번째 파라미터:물음표 위치
+        // 두번째 파라미터:넣을 값
+        pstmt.setString(1, search);
 
-	@GetMapping("sub4")
-	public String method4(String name, Model model) throws Exception {
-		String sql = """
-						SELECT *
-						FROM Customers
-						WHERE CustomerName LIKE ?
-						""";
+        ResultSet rs = pstmt.executeQuery();
+        while (rs.next()) {
+            MyBean252 row = new MyBean252(rs.getInt(1),
+                    rs.getString(2),
+                    rs.getString(5),
+                    rs.getDouble(6));
 
-		Connection con = dataSource.getConnection();
-		PreparedStatement pst = con.prepareStatement(sql);
-		pst.setString(1, "%" + name + "%");
-		ResultSet rs = pst.executeQuery();
+            list.add(row);
+        }
+        model.addAttribute("products", list);
+    }
 
-		var list = new ArrayList<MyBean253>();
+    // todo : 고객 이름을 입력 받아서 고객 정보 조회
+    //   sub4메소드와 sub4.jsp 작성
+    //  예)SELECT * FROM Customers WHERE CustomerName = ?
+    @GetMapping("sub4")
+    public String method4(String search, Model model) throws SQLException {
+        String sql = "SELECT * FROM Customers WHERE CustomerName = ?";
+        var list = new ArrayList<MyBean254Customer>();
 
-		try (con; pst; rs) {
-			while (rs.next()) {
-				int id = rs.getInt(1);
-				String customerName = rs.getString(2);
-				String contactName = rs.getString(3);
-				String address = rs.getString(4);
-				String city = rs.getString(5);
-				String country = rs.getString(7);
+        Connection conn = dataSource.getConnection();
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, search);
 
-				MyBean253 customer = new MyBean253(id, customerName, contactName, address, city, country);
-				list.add(customer);
-			}
-		}
-		model.addAttribute("customers", list);
-		model.addAttribute("prevSearch", name);
+        ResultSet rs = pstmt.executeQuery();
 
-		return "main25/sub4";
-	}
+        try (rs; conn; pstmt) {
 
-	@GetMapping("sub5")
-	public String method5(String search, Model model) throws SQLException {
-		var list = new ArrayList<MyBean253>();
-		String sql = """
-						SELECT * FROM Customers
-						WHERE CustomerName LIKE ?
-						""";
-		String keyword = "%" + search + "%";
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String name = rs.getString(2);
+                String contactName = rs.getString(3);
+                String address = rs.getString(4);
+                String city = rs.getString(5);
+                String postalCode = rs.getString(6);
+                String country = rs.getString(7);
 
-		Connection conn = dataSource.getConnection();
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, keyword);
-		ResultSet rs = pstmt.executeQuery();
+                MyBean254Customer obj = new MyBean254Customer();
+                obj.setId(id);
+                obj.setName(name);
+                obj.setContactName(contactName);
+                obj.setAddress(address);
+                obj.setCity(city);
+                obj.setPostalCode(postalCode);
+                obj.setCountry(country);
 
-		try (conn; pstmt; rs) {
-			while (rs.next()) {
-				int id = rs.getInt(1);
-				String customerName = rs.getString(2);
-				String contactName = rs.getString(3);
-				String address = rs.getString(4);
-				String city = rs.getString(5);
-				String country = rs.getString(7);
+                list.add(obj);
+            }
+        }
+        model.addAttribute("customerList", list);
+        model.addAttribute("prevSearch", search);
 
-				MyBean253 customer = new MyBean253(id, customerName, contactName, address, city, country);
-				list.add(customer);
-			}
-		}
+        return "main25/sub4CustomerList";
+    }
 
-		model.addAttribute("customers", list);
-		model.addAttribute("prevSearch", search);
+    @GetMapping("sub5")
+    public String method5(String search, Model model) throws SQLException {
+        var list = new ArrayList<MyBean254Customer>();
+        String sql = """
+                SELECT * FROM Customers
+                WHERE CustomerName LIKE ?
+                """;
+        String keyword = "%" + search + "%";
 
-		return "main25/sub4";
-	}
+        Connection conn = dataSource.getConnection();
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, keyword);
+        ResultSet rs = pstmt.executeQuery();
 
-	@GetMapping("sub6")
-	public void method6(String search, Model model) throws SQLException {
-		if (search == null || search.equals("")) {
-			return;
-		}
-		String sql = """
-						SELECT *
-						FROM Products
-						WHERE ProductName LIKE ?
-						""";
+        try (rs; conn; pstmt) {
 
-		var list = new ArrayList<MyBean255>();
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String name = rs.getString(2);
+                String contactName = rs.getString(3);
+                String address = rs.getString(4);
+                String city = rs.getString(5);
+                String postalCode = rs.getString(6);
+                String country = rs.getString(7);
 
-		Connection con = dataSource.getConnection();
-		PreparedStatement pstmt = con.prepareStatement(sql);
-		pstmt.setString(1, "%" + search + "%");
-		ResultSet rs = pstmt.executeQuery();
+                MyBean254Customer obj = new MyBean254Customer();
+                obj.setId(id);
+                obj.setName(name);
+                obj.setContactName(contactName);
+                obj.setAddress(address);
+                obj.setCity(city);
+                obj.setPostalCode(postalCode);
+                obj.setCountry(country);
 
-		try (con; pstmt; rs) {
-			while (rs.next()) {
-				int id = rs.getInt(1);
-				String name = rs.getString(2);
-				String supplier = rs.getString(3);
-				String category = rs.getString(4);
-				String unit = rs.getString(5);
-				double price = rs.getDouble(6);
+                list.add(obj);
+            }
+        }
 
-				MyBean255 product = new MyBean255(id, name, supplier, category, unit, price);
-				list.add(product);
-			}
+        model.addAttribute("customerList", list);
+        model.addAttribute("prevSearch", search);
 
-			model.addAttribute("products", list);
-			model.addAttribute("prevSearch", search);
-		}
-	}
+        return "main25/sub4CustomerList";
+    }
 
-	@GetMapping("sub7")
-	public String method7(String search, Model model) throws SQLException {
-		var list = new ArrayList<MyBean253>();
-		String sql = """
-						SELECT *
-						FROM Customers
-						WHERE CustomerName LIKE ?
-						OR ContactName LIKE ?
-						""";
+    // todo: 상품명으로 상품들 조회 메소드 작성
+    @GetMapping("sub6")
+    public String method6(String search, Model model) throws SQLException {
+        var list = new ArrayList<MyBean256Product>();
 
-		String keyword = "%" + search + "%";
+        String sql = """
+                SELECT *
+                FROM Products
+                WHERE ProductName LIKE ?
+                """;
+        String keyword = "%" + search + "%";
+        Connection conn = dataSource.getConnection();
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, keyword);
+        ResultSet rs = pstmt.executeQuery();
+        try (rs; conn; pstmt) {
+            while (rs.next()) {
+                MyBean256Product p = new MyBean256Product();
+                p.setId(rs.getInt(1));
+                p.setName(rs.getString(2));
+                p.setSupplierId(rs.getInt(3));
+                p.setCategoryId(rs.getInt(4));
+                p.setUnit(rs.getString(5));
+                p.setPrice(rs.getDouble(6));
+                list.add(p);
+            }
+        }
 
-		Connection con = dataSource.getConnection();
-		PreparedStatement pstmt = con.prepareStatement(sql);
-		pstmt.setString(1, keyword);
-		pstmt.setString(2, keyword);
+        model.addAttribute("prevSearch", search);
+        model.addAttribute("products", list);
 
-		ResultSet rs = pstmt.executeQuery();
-		try (con; pstmt; rs) {
-			while (rs.next()) {
-				int id = rs.getInt(1);
-				String name = rs.getString(2);
-				String contact = rs.getString(3);
-				String address = rs.getString(4);
-				String city = rs.getString(5);
-				String country = rs.getString(5);
+        return "main25/sub6ProductList";
+    }
 
-				MyBean253 obj = new MyBean253(id, name, contact, address, city, country);
-				list.add(obj);
-			}
-		}
-		model.addAttribute("customers", list);
-		model.addAttribute("prevSearch", search);
-		return "main25/sub4";
-	}
+    // 조회 문자열이 contactName 또는 customerName에 포함된 고객들 조회
+    @GetMapping("sub7")
+    public String method7(String search, Model model) throws SQLException {
+        var list = new ArrayList<MyBean254Customer>();
+        String sql = """
+                SELECT *
+                FROM Customers
+                WHERE CustomerName LIKE ?
+                   OR ContactName LIKE ?
+                """;
+        String keyword = "%" + search + "%";
+        Connection conn = dataSource.getConnection();
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, keyword);
+        pstmt.setString(2, keyword);
 
-	@GetMapping("sub8")
-	public void method8(String search, Model model) throws SQLException {
-		if (search == null || search.equals("")) {
-			return;
-		}
+        ResultSet rs = pstmt.executeQuery();
 
-		String sql = """
-						SELECT *
-						FROM Employees
-						WHERE LastName LIKE ?
-						OR FirstName LIKE ?
-						""";
+        try (rs; conn; pstmt) {
+            while (rs.next()) {
+                MyBean254Customer obj = new MyBean254Customer();
+                obj.setId(rs.getInt(1));
+                obj.setName(rs.getString(2));
+                obj.setContactName(rs.getString(3));
+                obj.setAddress(rs.getString(4));
+                obj.setCity(rs.getString(5));
+                obj.setPostalCode(rs.getString(6));
+                obj.setCountry(rs.getString(7));
+                list.add(obj);
+            }
+        }
+        model.addAttribute("prevSearch", search);
+        model.addAttribute("customerList", list);
+        return "main25/sub4CustomerList";
+    }
 
-		var list = new ArrayList<MyBean256Employees>();
+    // todo:
+    //  조회 문자열이 last name 또는 first name에 포함된 직원들 조회 메소드 작성
+    @GetMapping("sub8")
+    public String method8(String name, Model model) throws SQLException {
+        var list = new ArrayList<MyBean258Employee>();
+        String sql = """
+                SELECT *
+                FROM Employees
+                WHERE LastName LIKE ?
+                   OR FirstName LIKE ?
+                """;
+        Connection conn = dataSource.getConnection();
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, "%" + name + "%");
+        pstmt.setString(2, "%" + name + "%");
+        ResultSet rs = pstmt.executeQuery();
 
-		Connection con = dataSource.getConnection();
-		PreparedStatement pstmt = con.prepareStatement(sql);
-		pstmt.setString(1, STR."%\{search}%");
-		pstmt.setString(2, STR."%\{search}%");
-		ResultSet rs = pstmt.executeQuery();
+        try (rs; conn; pstmt) {
+            while (rs.next()) {
+                MyBean258Employee row = new MyBean258Employee();
+                row.setId(rs.getInt(1));
+                row.setLastName(rs.getString(2));
+                row.setFirstName(rs.getString(3));
+                row.setBirthDate(rs.getString(4));
+                row.setPhoto(rs.getString(5));
+                row.setNotes(rs.getString(6));
 
-		try (con; pstmt; rs) {
-			while (rs.next()) {
-				int id = rs.getInt(1);
-				String lName = rs.getString(2);
-				String fName = rs.getString(3);
-				String birth = rs.getString(4);
-				String photo = rs.getString(5);
-				String notes = rs.getString(6);
+                list.add(row);
 
-				MyBean256Employees data = new MyBean256Employees();
-				list.add(data);
-			}
-		}
+            }
+        }
 
-		model.addAttribute("employees", list);
-		model.addAttribute("prevSearch", search);
-	}
+        model.addAttribute("prevSearch", name);
+        model.addAttribute("employeeList", list);
+
+        return "main25/sub8EmployeeList";
+    }
+
 }
-

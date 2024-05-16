@@ -1,34 +1,41 @@
-#default
-USE w3schools;
-#Default : 값을 주지 않을 때의 기본값
+# 20default.sql
 
+USE w3schools;
+
+# DEFAULT : 값을 주지 않을 때의 기본값을 정의
 CREATE TABLE my_table13
 (
     col1 VARCHAR(10),
     col2 VARCHAR(10) DEFAULT 'abc'
 );
-
 INSERT INTO my_table13
     (col1, col2)
-VALUES ('가', '나');
-
+VALUES ('qwe', 'zxc');
+INSERT INTO my_table13
+    (col2)
+VALUES ('iop');
 INSERT INTO my_table13
     (col1)
-VALUES ('def');
-
-SELECT *
-FROM my_table13;
+VALUES ('bnm');
 
 INSERT INTO my_table13
     (col1, col2)
-VALUES ('123', NULL);
+VALUES ('jkl', NULL);
+SELECT *
+FROM my_table13;
+DESC my_table13;
 
+# my_table14 테이블 만들기
+#  4개의 컬럼 정의
+#   하나는 제약사항없이
+#   하나는 NOT NULL 만
+#   하나는 DEFAULT 만
+#   하나는 NOT NULL DEFAULT
 CREATE TABLE my_table14
 (
-    ID    INT NOT NULL,
-    Name  VARCHAR(10)  DEFAULT '홍길동',
-    Age   INT NOT NULL DEFAULT 18,
-    Hobby VARCHAR(3000)
+    col1 VARCHAR(10),
+    col2 VARCHAR(10) NOT NULL,
+    col3 VARCHAR(10)          DEFAULT 'abcde',
+    col4 VARCHAR(10) NOT NULL DEFAULT 'qwerty'
 );
-
-INSERT INTO
+DESC my_table14;

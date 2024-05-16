@@ -1,33 +1,31 @@
 package com.study.domain;
 
 public class MyBean102 {
-	private String manufacturer;
+    private String modelName;
+    private String color;
+    private Double price;
 
-	public String getModel() {
-		return model;
-	}
+    public String getModelName() {
+        return modelName;
+    }
 
-	public void setModel(String model) {
-		this.model = model;
-	}
+    public void setModelName(String modelName) {
+        this.modelName = modelName;
+    }
 
-	public int getMaxSpeed() {
-		return maxSpeed;
-	}
+    public String getColor() {
+        return color;
+    }
 
-	public void setMaxSpeed(int maxSpeed) {
-		this.maxSpeed = maxSpeed;
-	}
+    public void setColor(String color) {
+        this.color = color;
+    }
 
-	public String getManufacturer() {
-		return manufacturer;
-	}
+    public Double getPrice() {
+        return price;
+    }
 
-	public void setManufacturer(String manufacturer) {
-		this.manufacturer = manufacturer;
-	}
-
-	private String model;
-	private int maxSpeed;
-
+    public void setPrice(Double price) {
+        this.price = price;
+    }
 }

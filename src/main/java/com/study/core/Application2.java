@@ -11,15 +11,15 @@ import org.springframework.stereotype.Component;
 //  @Component이 붙은 클래스의 객체를 만들고 조직함(Dependency Injection)
 @SpringBootApplication
 public class Application2 {
-	public static void main(String[] args) {
-		BeanFactory beanFactory = SpringApplication.run(Application2.class);
-		Dao2 bean1 = beanFactory.getBean(Dao2.class);
-		Controller2 bean2 = beanFactory.getBean(Controller2.class);
+    public static void main(String[] args) {
+        BeanFactory beanFactory = SpringApplication.run(Application2.class);
+        Dao2 bean1 = beanFactory.getBean(Dao2.class);
+        Controller2 bean2 = beanFactory.getBean(Controller2.class);
 
-		System.out.println(System.identityHashCode(bean1));
-		System.out.println(System.identityHashCode(bean2));
+        System.out.println(System.identityHashCode(bean1));
+        System.out.println(System.identityHashCode(bean2));
 
-	}
+    }
 }
 
 // @Component : Spring이 관리하는 객체 (Spring Bean)

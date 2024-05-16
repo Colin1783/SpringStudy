@@ -1,8 +1,9 @@
+# 13insert.sql
+
 USE w3schools;
 
-
-#INSERT INTO Table(Columns)
-# VALUE (Or VALUES)
+# INSERT INTO 테이블명 (컬럼명...)
+# VALUES (데이터들..)
 
 SELECT *
 FROM Employees
@@ -10,58 +11,33 @@ ORDER BY EmployeeID DESC;
 
 DESC Employees;
 
-INSERT INTO Employees
-    (LastName, FirstName, BirthDate, Photo, Notes)
-VALUES ('Stark', 'Tony', '1959-05-01', 'EmpID9', 'Tony is Ironman wearing MK42');
+INSERT INTO Employees (LastName)
+VALUES ('ironman');
 
-DELETE
-FROM Employees
-WHERE EmployeeID BETWEEN 2036 AND 2037;
+INSERT INTO Employees (FirstName)
+VALUES ('tony');
 
 INSERT INTO Employees
     (LastName, FirstName, BirthDate, Photo, Notes)
-VALUES ('Logers', 'Steve', '1905-01-01', 'pic1', 'Steve Logers is Captain America, having shield.');
+VALUES ('captain', 'steve', '1990-01-01', 'pic1', 'america');
 
 INSERT INTO Employees
     (FirstName, LastName)
-VALUES ('Natasha', 'Romanoff');
+VALUES ('natasha', 'widow');
 
-
-
-
-# todo: 새 고객을
-
+# todo : 새 고객을 2개 입력하세요.
 INSERT INTO Customers
-(CustomerName, ContactName, Address, City, PostalCode, Country)
-VALUES ('Wayne Entertainment', 'Bruce Wayne', 'wherever','Gotham city, Washington','12345','USA')
-
+    (CustomerName, ContactName, Address, City, PostalCode, Country)
+VALUES ('hulk', 'bruce', 'ny', 'boston', '99999', 'usa');
 INSERT INTO Customers
-(CustomerName, ContactName, Address, City, PostalCode, Country)
-VALUES ('Ásgarðr', 'Thor Odinson', 'wherever','whatever','12345','Sweden');
-
-DELETE
-FROM Customers
-WHERE CustomerID = (SELECT MAX(CustomerID) FROM Customers);
+    (CustomerName, ContactName, Address, PostalCode, Country)
+VALUES ('thor', 'odinson', 'asgard', '22222', 'Korea');
 
 SELECT *
 FROM Customers
 ORDER BY CustomerID DESC;
 
-SELECT *
-FROM Employees
-ORDER BY EmployeeID DESC;
 
-DELETE
-FROM Employees
-WHERE EmployeeID BETWEEN (SELECT MAX(EmployeeID) FROM Employees) AND
+DESC Customers;
 
-DELETE FROM Employees
-WHERE EmployeeID >= (
-    SELECT EmployeeID
-    FROM (
-             SELECT EmployeeID
-             FROM Employees
-             ORDER BY EmployeeID DESC
-             LIMIT 1 OFFSET 4
-         ) AS SubQuery
-);
+# null : 값이 없음

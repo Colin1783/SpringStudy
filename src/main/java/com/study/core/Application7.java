@@ -9,16 +9,20 @@ import org.springframework.stereotype.Component;
 
 @SpringBootApplication
 public class Application7 {
-	public static void main(String[] args) {
-		BeanFactory context = SpringApplication.run(Application7.class, args);
+    public static void main(String[] args) {
+        BeanFactory context = SpringApplication.run(Application7.class, args);
+        MyClass71 b1 = context.getBean(MyClass71.class);
+        System.out.println("b1 = " + b1);
+        MyClass72 b2 = context.getBean(MyClass72.class);
+        System.out.println("b2 = " + b2);
 
-		Object b1 = context.getBean("myClass71");
-		Object b2 = context.getBean(MyClass72.class);
+        Object b3 = context.getBean("myClass71");
+        System.out.println("b3 = " + b3);
 
-		System.out.println("b1 = " + b1);
-		System.out.println("b2 = " + b2);
+        Object b4 = context.getBean("someMethod1");
+        System.out.println("b4 = " + b4);
 
-	}
+    }
 }
 
 @Component
@@ -26,15 +30,18 @@ class MyClass71 {
 
 }
 
-//@Component 어노테이션을 붙일 수 없는 클래스로 Spring Bean 만들기
 @Configuration
 class MyConfiguration7 {
-	@Bean
-	public MyClass72 someMethod1() {
-		return new MyClass72();
-	}
-}
 
+    // @Component 애노테이션을 붙일 수 없는
+    // 클래스로 Spring Bean 만들기
+    // 이름은 메소드명으로 결정됨
+    @Bean
+    public MyClass72 someMethod1() {
+        return new MyClass72();
+    }
+
+}
 
 class MyClass72 {
 

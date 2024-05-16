@@ -1,26 +1,29 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Colin
-  Date: 2024-04-09
-  Time: 오후 12:09
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
-<h1>h1</h1>
-<h2>h2</h2>
+<%-- emmet(zen coding) : html 코드 단축키 --%>
+<%--div--%>
+<div></div>
+<%-- div*3 --%>
+<div></div>
+<div></div>
+<div></div>
+<%--div>p--%>
 <div>
     <p></p>
 </div>
-<div>
-    <p></p>
-</div>
-<p class="item" id="123"></p>
-<a href="www.naver.com"></a>
+<%--h1+p--%>
+<h1></h1>
+<p></p>
+<%--p.note--%>
+<p class="note"></p>
+<%--p#elem1--%>
+<p id="elem1"></p>
+<%--p#elem2.note--%>
+<p id="elem2" class="note"></p>
 <%--p.note.error.special--%>
 <p class="note error special"></p>
 <%--p#para$*5--%>
@@ -35,46 +38,63 @@
 <p id="para12"></p>
 <p id="para13"></p>
 <p id="para14"></p>
+<%--p{content}*3--%>
+<p>content</p>
+<p>content</p>
+<p>content</p>
 
-<%--p{lorem}*3--%>
-<p>lorem</p>
-<p>lorem</p>
-<p>lorem</p>
-
-<%--p{lorem}--%>
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi atque autem consectetur dignissimos, eius error et,
-eveniet ex in, maiores modi necessitatibus officia omnis perspiciatis quaerat repudiandae suscipit veniam vero.
-
+<%--lorem--%>
+Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aperiam asperiores autem consequuntur doloribus et eveniet
+ex minima, neque pariatur possimus quisquam quo reiciendis reprehenderit totam velit vero voluptas voluptatum.
+<%--lorem5--%>
+Lorem ipsum dolor sit amet.
+<%--lorem3--%>
+Lorem ipsum dolor.
+<%--lorem1--%>
+Lorem.
 <%--p[title]--%>
 <p title=""></p>
+<%--p[title="some title"]--%>
+<p title="some title"></p>
+<%--a[href="https://daum.net"][target="_blank"]--%>
+<a href="https://daum.net" target="_blank"></a>
 
-<%--a[href="https://www.naver.com"][target="_blank"]--%>
-<a href="https://www.naver.com" target="_blank"></a>
+<%--table>thead>tr>th*2^^tbody>tr>td*2--%>
+<table>
+    <thead>
+    <tr>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td></td>
+        <td></td>
+    </tr>
+    </tbody>
+</table>
 
 <%--table>thead>tr>th*2>lorem1^^^tbody>tr>td*2>lorem1--%>
 <table>
     <thead>
     <tr>
         <th>Lorem.</th>
-        <th>Necessitatibus.</th>
+        <th>Eaque?</th>
     </tr>
     </thead>
     <tbody>
     <tr>
         <td>Lorem.</td>
-        <td>Maiores.</td>
+        <td>Sit.</td>
     </tr>
     </tbody>
     <tbody>
     <tr>
         <td>Lorem.</td>
-        <td>Consequuntur.</td>
+        <td>Eveniet.</td>
     </tr>
     </tbody>
 </table>
-<i></i>
-<i></i>
-<i></i>
-
 </body>
 </html>

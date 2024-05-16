@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Colin
-  Date: 2024-04-15
-  Time: 오전 11:27
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <html>
@@ -13,18 +6,24 @@
 </head>
 <body>
 <div>
-    <textarea cols="30" rows="10"></textarea>
+    <%--  textarea 여러 줄 문자열를 작성할 때 사용--%>
+    <textarea></textarea>
 </div>
-
 <div>
-    <select name="food">
+    <%--  select>option*3>lorem1--%>
+    <select name="" id="">
+        <option value="">Lorem.</option>
+        <option value="">Blanditiis?</option>
+        <option value="">Dolore.</option>
     </select>
 </div>
 <div>
+    <%--  button : 버튼--%>
     <button>클릭하세요</button>
-    <input type="button" value="클릭하세요">
+    <input type="button" value="클릭요">
+    <%--  submit 버튼--%>
     <input type="submit">
-
 </div>
+
 </body>
 </html>

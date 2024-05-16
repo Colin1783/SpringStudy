@@ -33,12 +33,20 @@ VALUES (1, 2, 'pqr'),
        (2, 2, 'yza');
 
 SELECT *
+FROM table7;
+SELECT *
+FROM table8;
+SELECT *
+FROM table9;
+
+# cartesian product
+# 7열, 24행
+SELECT *
 FROM table7 t7
          JOIN table9 t9
               ON t7.col1 = t9.col3
          JOIN table8 t8
               ON t8.cola = t9.colc;
-
 
 USE w3schools;
 
@@ -48,7 +56,9 @@ SELECT o.OrderID,
        CustomerName,
        e.EmployeeID,
        e.FirstName,
-       e.LastName
+       e.LastName,
+       s.ShipperID,
+       s.ShipperName
 FROM Orders o
          JOIN Customers c
               ON o.CustomerID = c.CustomerID
@@ -56,32 +66,33 @@ FROM Orders o
               ON o.EmployeeID = e.EmployeeID
          JOIN Shippers s
               ON o.ShipperID = s.ShipperID
-WHERE o.OrderDate BETWEEN '1996-07-01' AND '1996-07-31';
+WHERE o.OrderDate BETWEEN '1996-07-01' AND '1996-07-31'
+ORDER BY o.OrderDate, c.CustomerID, e.EmployeeID, s.ShipperID;
 
-#1996년 7월 8일에 주문된 상품명 조회
-
-SELECT p.ProductName, o.OrderDate
-FROM Orders o
-         JOIN OrderDetails od
-              ON o.OrderID = od.OrderID
-         JOIN Products p
-              ON p.ProductID = od.ProductID
-WHERE OrderDate = '1996-07-08';
-
-SELECT *
-FROM Products
-WHERE ProductID = 71;
-
-SELECT p.ProductID, c.CustomerName, Address, o.OrderDate
+# 1996년 7월 8일에 주문된 상품명 조회
+# Orders, OrderDetails, Products
+SELECT DISTINCT p.ProductName
 FROM Orders o
          JOIN OrderDetails od
               ON o.OrderID = od.OrderID
          JOIN Products p
               ON od.ProductID = p.ProductID
-         JOIN Customers c
-              ON c.CustomerID = o.CustomerID
-WHERE p.ProductID = 71;
+WHERE o.OrderDate = '1996-07-08'
+ORDER BY ProductName;
 
 SELECT *
-FROM OrderDetails
+FROM Products
 WHERE ProductID = 71;
+
+# Fløtemysost 상품을 구매한 고객의 이름과 주소, 주문일 조회
+# Customers, Orders, OrderDetails, Products
+SELECT c.CustomerName, c.Address, o.OrderDate
+FROM Customers c
+         JOIN Orders o
+              ON c.CustomerID = o.CustomerID
+         JOIN OrderDetails od
+              ON o.OrderID = od.OrderID
+         JOIN Products p
+              ON od.ProductID = p.ProductID
+WHERE p.ProductName = 'Fløtemysost'
+ORDER BY c.CustomerName, o.OrderDate;

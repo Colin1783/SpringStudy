@@ -1,18 +1,21 @@
 package com.study.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
+@EqualsAndHashCode
+@ToString
 @AllArgsConstructor
-@NoArgsConstructor
 public class MyBean141 {
-	private String city;
-	private String country;
-	private Integer age;
-	private String name;
+    private String city;
+    private String country;
+    private Integer age;
+    private String name;
+
+    // getters, setters
+    // constructor
+    // toString
+    // hashCode, equals
 
 }

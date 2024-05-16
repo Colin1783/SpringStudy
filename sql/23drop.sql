@@ -1,15 +1,20 @@
-USE w3schools;
+# 23drop.sql
 
-#DROP
+USE w3schools;
+CREATE TABLE table99
+(
+    col1 INT
+);
+# DROP TABLE :테이블 삭제
+# 매우 주의해서 실행해야 하는 쿼리!!!!!!!
+DROP TABLE table99;
+
+SELECT *
+FROM table99;
+
+# table100 테이블 만들고, 테이블 삭제하기
 CREATE TABLE table100
 (
-    col1 VARCHAR(10) UNIQUE
+    name VARCHAR(10)
 );
-
-DESC table100;
-
-ALTER TABLE table100
-    MODIFY col1 INT NOT NULL;
-
 DROP TABLE table100;
-

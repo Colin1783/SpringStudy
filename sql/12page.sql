@@ -1,3 +1,5 @@
+#12page.sql
+
 USE w3schools;
 
 INSERT INTO Customers
@@ -5,19 +7,16 @@ INSERT INTO Customers
 SELECT CustomerName, ContactName, Address, City, PostalCode, Country
 FROM Customers;
 
-SELECT *
+SELECT COUNT(*)
 FROM Customers;
 
-DELETE
-FROM Customers
-WHERE CustomerID BETWEEN 361 AND 636;
-
-SELECT Count(*)
-FROM Employees;
-
+# 직원 테이블 데이터 추가
 INSERT INTO Employees
     (LastName, FirstName, BirthDate, Photo, Notes)
 SELECT LastName, FirstName, BirthDate, Photo, Notes
+FROM Employees;
+
+SELECT COUNT(*)
 FROM Employees;
 
 SELECT EmployeeID
@@ -27,7 +26,3 @@ LIMIT 368;
 DELETE
 FROM Employees
 WHERE EmployeeID > 580;
-
-SELECT *
-FROM Employees
-ORDER BY EmployeeID

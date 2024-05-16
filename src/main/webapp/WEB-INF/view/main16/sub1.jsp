@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Colin
-  Date: 2024-04-12
-  Time: 오후 12:24
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <html>
@@ -12,9 +5,13 @@
     <title>Title</title>
 </head>
 <body>
-<c:import url="navbar1.jsp"></c:import>
-<c:import url="/WEB-INF/view/main16/navbar1.jsp"></c:import>
-<c:import url="../../view/fragment/footer.jsp"></c:import>
+<%-- 경로 : /로 시작하지 않으면 상대경로(현재경로 기준) --%>
+<c:import url="navbar1.jsp"/>
 
+<%-- 경로 : /로 시작하면 절대경로 webapp 폴더 기준 --%>
+<c:import url="/WEB-INF/view/main16/navbar1.jsp"/>
+
+<c:import url="../../fragment/footer1.jsp"/>
+<c:import url="/WEB-INF/fragment/footer1.jsp"/>
 </body>
 </html>
