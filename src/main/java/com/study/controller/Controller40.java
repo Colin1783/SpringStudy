@@ -35,4 +35,26 @@ public class Controller40 {
 		System.out.println(param1);
 		System.out.println(param2);
 	}
+
+	@PostMapping("/api/someurl3")
+	public void method6(@RequestParam("id") Integer id,
+	                    @RequestParam("city") String city,
+	                    @RequestParam("country") String country) {
+
+		System.out.println(id);
+		System.out.println(city);
+		System.out.println(country);
+	}
+
+	@GetMapping("/api/someurl4")
+	public void method7(@RequestParam("name") String name,
+	                    @RequestParam("age") Integer age) {
+		System.out.println(name);
+		System.out.println(age);
+	}
+
+	@PostMapping("/api/someurl4")
+	public void method8() {
+		System.out.println("Controller40.method8");
+	}
 }
