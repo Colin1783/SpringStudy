@@ -6,4 +6,6 @@ import lombok.Data;
 public class MyBean412 {
 	private String menu;
 	private String[] dish;
+
+
 }

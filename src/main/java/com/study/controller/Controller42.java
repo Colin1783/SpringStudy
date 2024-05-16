@@ -1,5 +1,6 @@
 package com.study.controller;
 
+import com.study.domain.MyBean411;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,4 +40,21 @@ public class Controller42 {
 		return Map.of("name", "son", "age", 33,
 						"married", false, "info, ", Map.of("height", 180, "weight", 70, "bloodType", "A"), "hobby", List.of("reading", "movie", "music"));
 	}
+
+	@GetMapping("/sub4")
+	@ResponseBody
+	public List<Map<String, Object>> method4() {
+		return List.of(Map.of("name", "son", "age", 33),
+						Map.of("name", "lee", "age", 44));
+	}
+
+	@GetMapping("/sub5")
+	@ResponseBody
+	public MyBean411 method5() {
+		MyBean411 myBean411 = new MyBean411();
+		myBean411.setName("son");
+		myBean411.setAge(33);
+		return myBean411;
+	}
+
 }
