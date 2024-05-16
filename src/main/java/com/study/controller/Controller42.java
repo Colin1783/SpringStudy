@@ -1,6 +1,7 @@
 package com.study.controller;
 
 import com.study.domain.MyBean411;
+import com.study.domain.MyBean412;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,4 +58,13 @@ public class Controller42 {
 		return myBean411;
 	}
 
+	@GetMapping("/sub6")
+	@ResponseBody
+	public MyBean412 method6() {
+		MyBean412 myBean412 = new MyBean412();
+		myBean412.setMenu(List.of("감자", "고구마"));
+		myBean412.setPrice(Map.of("감자", 1000, "고구마", 2000));
+		myBean412.setDish(new String[]{"짜장면", "짬뽕"});
+		return myBean412;
+	}
 }
